@@ -1,0 +1,10 @@
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\bin\Debug\Đồ án cuối kì CTDL.exe.config
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\bin\Debug\Đồ án cuối kì CTDL.exe
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\bin\Debug\Đồ án cuối kì CTDL.pdb
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ án cuối kì CTDL.csproj.AssemblyReference.cache
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ_án_cuối_kì_CTDL.Form1.resources
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ_án_cuối_kì_CTDL.Properties.Resources.resources
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ án cuối kì CTDL.csproj.GenerateResource.cache
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ án cuối kì CTDL.csproj.CoreCompileInputs.cache
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ án cuối kì CTDL.exe
+D:\code C#\CTDL kì 2\Đồ án cuối kì CTDL\Đồ án cuối kì CTDL\obj\Debug\Đồ án cuối kì CTDL.pdb
