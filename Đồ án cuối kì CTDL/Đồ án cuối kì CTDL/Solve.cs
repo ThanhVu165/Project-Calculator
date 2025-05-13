@@ -17,8 +17,7 @@ namespace Đồ_án_cuối_kì_CTDL
         double Ans;
         bool OpCheck = true; //Check giá trị số âm hoặc dương ở đầu phương trình ,sau khi mở ngoặc, !,%
         bool ErrorCheck = false;
-
-
+        
         /* =∞; Lũy thừa nhưng không phải số nguyên; 2 dấu toán tử đứng cạnh nhau; chỉ có toán tử nhưng không có số
           Trong căn bé hơn 0; thiếu dấu ngoặc */
 
@@ -40,19 +39,23 @@ namespace Đồ_án_cuối_kì_CTDL
 
             List<string> Postfix = ConvertInfix(Infix);
             result = CalPostfix(Postfix);
-            if (ErrorCheck) return "Lỗi";
+            if (ErrorCheck) 
+            {
+                ErrorCheck = false; //Gán false để đảm bảo không bị in ra lỗi ở lần in kết quả sau
+                return "Lỗi";
+            }
 
 
-            return Math.Round(result, 8).ToString("0.########");
+            return Math.Round(result, 8).ToString("0.########"); //Đưa ra kết quả nếu là số thập phân thì làm tròn đến số thập phân thứ 8
         }
 
         //Kiểm tra dấu
-        public bool Operators(char value)
+        public bool Operators(char value) //Kiểm tra xem có phải là toán tử 
         {
             return value == '+' || value == '-' || value == '×' || value == '÷' || value == '^' || value == '√' || value == '/' || value == '%' || value == '!';
         }
         // Độ ưa tiên
-        static int Priority(char value)
+        static int Priority(char value)  //Kiểm tra thứ tự ưu tiên của các toán tử
         {
             switch (value)
             {
@@ -86,13 +89,16 @@ namespace Đồ_án_cuối_kì_CTDL
 
             for (int i = 0; i < Infix.Length; i++)
             {
+                
                 char? prev = i > 0 ? Infix[i - 1] : (char?)null;//biến prev giúp chứa giá trị đứng trước
 
+                
 
                 //Nhận diện số 
                 if (char.IsDigit(Infix[i]) || Infix[i] == '.')
                 {
                     number += Infix[i];
+
                     continue;
                 }
                 //Thực hiện kiểm tra trước và sau Ans để nhân ngầm
@@ -109,7 +115,7 @@ namespace Đồ_án_cuối_kì_CTDL
                     Postfix.Add("Ans");//Thêm Ans vào Postfix
 
 
-
+                  
                     //Kiếm tra nếu phía trước là số, !, %, Ans, ) thì thêm dấu x vào stack 
                     if (prev.HasValue && (char.IsDigit(prev.Value) || prev == '!' || prev == '%' || prev == 'A' || prev == ')'))
                     {
@@ -118,7 +124,7 @@ namespace Đồ_án_cuối_kì_CTDL
                         myStack.Push('×');
                     }
 
-
+                    
 
                     OpCheck = false;//Không cho phép kiểm tra giá trị âm dương sau ANS
 
@@ -126,8 +132,13 @@ namespace Đồ_án_cuối_kì_CTDL
                 }
                 else if (Operators(Infix[i]))
                 {
+                    
+
                     //Không cho phép kiểm tra giá trị âm dương sau dấu ! và %
-                    if (Infix[i] == '!' || Infix[i] == '%') OpCheck = false;
+                    if (Infix[i] == '!' || Infix[i] == '%')
+                        OpCheck = false;
+
+                    
 
                     //Kiểm tra giá trị âm dương của một toán hạng
                     if (OpCheck)
@@ -143,8 +154,9 @@ namespace Đồ_án_cuối_kì_CTDL
                             continue;
                         }
 
-
                     }
+                    
+
                     //KIỂM TRA TRƯỜNG HỢP NHÂN NGẦM ĐỐI VỚI PHÍA TRƯỚC DẤU CĂNG
                     if (Infix[i] == '√')
                     {
@@ -174,7 +186,7 @@ namespace Đồ_án_cuối_kì_CTDL
                 }
                 else if (Infix[i] == '(')
                 {
-                    //Thêm toán hạng vào Postfix trước khi thực hiện thêm ( vào stack để đảm bảo không gây ra lỗi
+                    //Thêm toán hạng vào Postfix trước khi thực hiện thêm '(' vào stack để đảm bảo không gây ra lỗi
                     if (number.Length > 0)
                     {
                         Postfix.Add(number);
@@ -189,7 +201,7 @@ namespace Đồ_án_cuối_kì_CTDL
                         myStack.Push('×');
                     }
 
-                    //Push ( vào myStack
+                    //Push '(' vào myStack
                     myStack.Push(Infix[i]);
 
                     OpCheck = true; // Cho phép kiểm tra giá trị âm dương 
@@ -221,13 +233,15 @@ namespace Đồ_án_cuối_kì_CTDL
                     }
                 }
             }
-
+            
             //Thêm toán hạng còn xót lại cuối dãy Infix vào Postfix 
-            if (number.Length > 0)
+            if (number.Length > 0  )
             {
                 Postfix.Add(number);
                 number = "";
             }
+            
+            
             //Pop tất cả toán tử còn lại trong myStack ra Postfix
             while (myStack.Count() > 0)
             {
@@ -263,14 +277,14 @@ namespace Đồ_án_cuối_kì_CTDL
                     switch (value)
                     {
                         case "!":
-                            if (!(int.TryParse(num1.ToString(), out int number) && number > 0)) ErrorCheck = true;
+                            if (!(int.TryParse(num1.ToString(), out int number) && number > 0)) ErrorCheck = true; //Nếu toán hạng không phải là số tự nhiên lớn hơn 0 thì báo lỗi
                             else myStack.Push(Factorial((int)num1));
                             break;
                         case "%":
                             myStack.Push((num1 / 100));
                             break;
                         case "√":
-                            if (num1 < 0) ErrorCheck = true;
+                            if (num1 < 0) ErrorCheck = true; //Nếu toán hạng trong căn bé hơn 0 thì báo lỗi
                             else myStack.Push(Math.Sqrt(num1));
                             break;
                     }
@@ -295,7 +309,7 @@ namespace Đồ_án_cuối_kì_CTDL
                             break;
                         case "/":
                         case "÷":
-                            if (num1 == 0) ErrorCheck = true;
+                            if (num1 == 0) ErrorCheck = true; //Nếu toán hạng dưới mẫu bằng 0 thì báo lỗi
                             else myStack.Push(num2 / num1);
                             break;
                         case "^":
